@@ -36,7 +36,7 @@ public class LibraryBookDecorator implements BookDecorator {
     // Méthodes de l'interface IBook déléguées à l'objet décoré
     @Override
     public String getTitle() {
-        return book.getTitle();
+        return book.getTitle() + " (Library book)";
     }
 
     @Override

@@ -14,20 +14,19 @@ public class LibraryFacade {
     // autres attributs si nécessaire
 
     public LibraryFacade(OldBookStore oldBookStore) {
-        //TODO à compléter
+      this.oldBookStore = oldBookStore;
+      this.bookStoreAdapter = new BookStoreAdapter(oldBookStore);
     }
 
 
     // Méthodes simplifiées pour l'accès client
     public IBook getBook(String title) {
-        // Logique pour obtenir un aperçu du livre
-        //TODO à compléter
-        return null ;
+      return bookStoreAdapter.fetchBook(title);
     }
 
     // Méthode qui renvoie un libraryBookDecorator
     public IBook libraryBook(String title) {
-        //TODO à compléter
-        return null;
+        Book book = oldBookStore.getBook(title);
+        return new LibraryBookDecorator(book);
     }
 }
