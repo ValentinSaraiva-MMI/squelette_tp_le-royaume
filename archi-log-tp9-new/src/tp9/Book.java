@@ -31,14 +31,7 @@ public class Book implements IBook {
         this.price = price;
     }
 
-
-    // getters, setters, etc.
-
-
-    //TODO à compléter
-
     public String preview() {
-        // Simule l'affichage d'un aperçu du livre (indiquez par exemple "Preview of Clean Code: [First few lines of the book...]")
-        return null;
+        return "Preview of " + title + ": [First few lines of the book...]";
     }
 }

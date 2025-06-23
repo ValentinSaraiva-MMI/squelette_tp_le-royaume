@@ -7,38 +7,64 @@ import java.time.LocalDate;
 public class LibraryBookDecorator implements BookDecorator {
     private Book book;
     private boolean isLoaned; // prêt en cours ou non
-    private LocalDate date; // date de prêt
+    private LocalDate dueDate; // date de prêt
 
     public LibraryBookDecorator(Book book) {
-        //TODO à compléter
+        this.book = book;
+        this.isLoaned = false;
     }
 
-    // définit un prêt. isLoaned de vient vrai, et on fournit la date du prêt
+    // définit un prêt. isLoaned devient vrai, et on fournit la date du prêt
     public void loanOut(LocalDate dueDate) {
-        //TODO à compléter
+        this.isLoaned = true;
+        this.dueDate = dueDate;
     }
 
     // Le livre a été ramené, fin du prêt
     public void returnBook() {
-        //TODO à compléter
-    }
+        this.isLoaned = false;
+        this.dueDate = null;    }
 
     public boolean isLoanedOut() {
-        //TODO à compléter
-        return false ;
+        return isLoaned;
     }
 
     public LocalDate getDueDate() {
-        //TODO à compléter
-        return null ;
+        return dueDate;
     }
 
-    // Implémentation des méthodes héritées de Book
-    //TODO à compléter
+    // Méthodes de l'interface IBook déléguées à l'objet décoré
+    @Override
+    public String getTitle() {
+        return book.getTitle();
+    }
 
+    @Override
+    public void setTitle(String title) {
+        book.setTitle(title);
+    }
 
-    public String toString ()
-    {
-        return book.getTitle() + (isLoanedOut() ? " has been loaned." : " is available for a loan.");
+    @Override
+    public double getPrice() {
+        return book.getPrice();
+    }
+
+    @Override
+    public void setPrice(double price) {
+        book.setPrice(price);
+    }
+
+    @Override
+    public String preview() {
+        return book.preview();
+    }
+
+    @Override
+    public String toString() {
+        if (isLoanedOut()) {
+            return getTitle() + " has been loaned out. Due date: " + getDueDate();
+        } else {
+            return getTitle() + " is available for a loan.";
+        }
     }
 }
